@@ -1,3 +1,3 @@
 # KuailewoApp
 ##ScreenShot
-!(ScreenShot.gif)
+![pic1](ScreenShot.gif)
