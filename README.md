@@ -1,1 +1,3 @@
 # KuailewoApp
+##ScreenShot
+!(ScreenShot.gif)
