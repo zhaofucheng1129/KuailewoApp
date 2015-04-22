@@ -1,0 +1,216 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+*{
+	padding:0px;
+	margin:0px;
+	}
+</style>
+
+<script language="javascript" type="text/javascript">
+var myUrl1 = "";
+var myUrl2 = "";
+var adWidth = 0;
+var adHeight = 0;
+var adWidth1 = 0;
+var adHeight1 = 0;
+var adOri = 0;//0 is portrait 1 is landscape
+var adScale = 1;
+var loadImgSize = 32;
+function initFullad(url1,url2,w,h,ori,scale){
+	myUrl1 = url1;
+	myUrl2 = url2;
+	adWidth = w;
+	adHeight = h;
+	adOri = ori;
+    if(scale>2){
+        adScale=2;
+    }else{
+        adScale = scale;
+    }
+    getImageSize(exeInit,adOri);
+}
+function exeInit(w,h,o){
+	//alert(w+","+h);
+	window.location.href='adsmogo://adsmogo.cusexad.com/?action=init&width='+w+"&height="+h;
+}
+function getImageSize(callBack,o){
+	 var adImg = new Image();
+    //
+        adImg.onerror=function(){
+//            alert('error load image'+adImg.url1);
+            window.location.href='adsmogo://adsmogo.cusexad.com/?action=errorload';
+        };
+
+	if(o == 0){
+		adImg.src = myUrl1;
+		adImg.onload=function(){
+			adWidth = adImg.width/adScale;
+			adHeight = adImg.height/adScale;
+			callBack(adWidth,adHeight,o);
+		}
+	}else{
+		adImg.src = myUrl2;
+		adImg.onload=function(){
+			adWidth1 = adImg.width/adScale;
+			adHeight1 = adImg.height/adScale;
+			callBack(adWidth1,adHeight1,o);
+		}
+	}
+    
+	
+}
+
+function showFullad(){
+	var aw,ah;
+	if(adOri == 0){
+		aw = adWidth < adHeight?adWidth:adHeight;
+		ah = adWidth < adHeight?adHeight:adWidth;
+	}else{
+		aw = adWidth1 > adHeight1?adWidth1:adHeight1;
+		ah = adWidth1 > adHeight1?adHeight1:adWidth1;
+	}
+	var parentElement = document.getElementById("adView");
+	
+	var adDiv = document.getElementById('adDiv');
+	if(adDiv){
+		hiddenLoding(false);
+	}else{
+		adDiv = document.createElement('div');
+		adDiv.id = "adDiv";
+		var loadingImg = document.createElement('img');
+		loadingImg.style.width=loadImgSize+"px";
+		loadingImg.style.height=loadImgSize+"px";
+		loadingImg.style.position = "absolute";
+		loadingImg.style.left = (aw-loadImgSize)/2+"px";
+		loadingImg.style.top = (ah-loadImgSize)/2+"px";
+		loadingImg.src = "loading.gif";
+		loadingImg.id = "loadingImg";
+		adDiv.appendChild(loadingImg); 
+		
+		parentElement.appendChild(adDiv);
+	}
+	
+	var adContentImg = document.createElement('img');
+	adContentImg.style.width=aw+"px";
+	adContentImg.style.height=ah+"px";
+	adContentImg.style.position = "absolute";
+	adContentImg.style.visibility = "hidden";
+	adContentImg.src = (adOri == 0?myUrl1:myUrl2);
+	adContentImg.id = (adOri == 0?"adPor":"adLan");
+	adContentImg.onload=function(){
+		hiddenLoding(true);
+		this.style.visibility = "visible";
+		var adOtherImg = document.getElementById(adOri == 0?"adLan":"adPor");
+		if(adOtherImg){
+			adOtherImg.style.visibility = "hidden";
+		}
+		window.location.href='adsmogo://adsmogo.cusexad.com/?action=onload'
+		};
+		
+	adContentImg.onclick = function(){
+		window.location.href='adsmogo://adsmogo.cusexad.com/?action=click'
+		};
+		
+	adDiv.appendChild(adContentImg); 
+	
+}
+
+function hiddenLoding(flag){
+	var loadingImg = document.getElementById("loadingImg");
+	if(loadingImg){
+		loadingImg.style.visibility = flag?"hidden":"visible";
+		if(!flag){
+			loadingImg.style.zIndex = 3;
+            
+            var aw=0,ah=0;
+            if(adOri == 0){
+                if((adWidth*adHeight)>0){
+                    aw = adWidth < adHeight?adWidth:adHeight;
+                    ah = adWidth < adHeight?adHeight:adWidth;
+                }else if((adWidth1*adWidth1)>0){
+                    aw = adWidth1 < adHeight1?adWidth1:adHeight1;
+                    ah = adWidth1 < adHeight1?adHeight1:adWidth1;
+                }
+                
+            }else{
+                if((adWidth1*adWidth1)>0){
+                    aw = adWidth1 > adHeight1?adWidth1:adHeight1;
+                    ah = adWidth1 > adHeight1?adHeight1:adWidth1;
+                }else if((adWidth*adWidth)>0){
+                    aw = adWidth > adHeight?adWidth:adHeight;
+                    ah = adWidth > adHeight?adHeight:adWidth;
+                }
+
+            }
+            if((aw*ah)>0){
+                loadingImg.style.left = (aw-loadImgSize)/2+"px";
+                loadingImg.style.top = (ah-loadImgSize)/2+"px";
+            }
+		}
+	}
+}
+
+function changrOriInit(w,h,o){
+	if(w>0&&h>0){
+		if(o==0){
+			adWidth = w;
+			adHeight = h;
+		}else{
+			adWidth1 = w;
+			adHeight1 = h;
+		}
+		if(o == adOri){
+           showFullad(); 
+        }
+	}
+}
+
+function changeSize(adImg){
+	var aw,ah;
+	if(adOri == 0){
+		aw = adWidth < adHeight?adWidth:adHeight;
+		ah = adWidth < adHeight?adHeight:adWidth;
+	}else{
+		aw = adWidth1 > adHeight1?adWidth1:adHeight1;
+		ah = adWidth1 > adHeight1?adHeight1:adWidth1;
+	}
+	adImg.style.width=aw+"px";
+	adImg.style.height=ah+"px";
+}
+function changeOri(ori){
+	if(ori == adOri){
+		return;	
+	}
+    hiddenLoding(true);
+	var adCurImg = document.getElementById(adOri == 0?"adPor":"adLan");
+	var adWillImg = document.getElementById(adOri == 0?"adLan":"adPor");
+	if(adCurImg){
+			adCurImg.style.visibility = "hidden";
+		}
+	adOri = ori;
+	if(adWillImg){
+		adWillImg.style.visibility = "visible";
+		changeSize(adWillImg);
+	}else{
+		hiddenLoding(false);
+		getImageSize(changrOriInit,ori);
+	}
+}
+
+var testOri = 0;
+function testchange(){
+	testOri = testOri==0?1:0;
+	changeOri(testOri);
+	}
+
+</script>
+</head>
+
+<body>
+<body>
+
+<div id="adView"></div>
+</body>
+</body>
+</html>

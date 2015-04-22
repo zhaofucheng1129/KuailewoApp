@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B639B11E-2E72-4D73-B1B6-9E33503CA0A8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>快乐窝</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F6B2AB65DB0E5D62AA8960C6FAECE78D692D349D</key>
+		<string>github.com:zhaofucheng1129/kuailewo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>kuailewo_App/快乐窝.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F6B2AB65DB0E5D62AA8960C6FAECE78D692D349D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:zhaofucheng1129/kuailewo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F6B2AB65DB0E5D62AA8960C6FAECE78D692D349D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F6B2AB65DB0E5D62AA8960C6FAECE78D692D349D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>kuaile</string>
+		</dict>
+	</array>
+</dict>
+</plist>

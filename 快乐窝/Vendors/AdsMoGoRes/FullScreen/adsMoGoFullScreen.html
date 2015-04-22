@@ -1,0 +1,76 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+*{
+	padding:0px;
+	margin:0px;
+	}
+</style>
+
+<script language="javascript" type="text/javascript">
+var myUrl1 = "";
+var myUrl2 = "";
+var adWidth = 0;
+var adHeight = 0;
+var adWidth1 = 0;
+var adHeight1 = 0;
+var adOri = 0;//0 is portrait 1 is landscape
+var adScale = 1;
+var loadImgSize = 32;
+function initFullad(url1,url2,w,h,ori,scale){
+	myUrl1 = url1;
+	myUrl2 = url2;
+	adWidth = w;
+	adHeight = h;
+	adOri = ori;
+    if(scale>2){
+        adScale=2;
+    }else{
+        adScale = scale;
+    }
+    window.location.href='adsmogo://adsmogo.cusexad.com/?action=init&width='+w+"&height="+h;
+}
+
+
+function showFullad(){
+	var aw,ah;
+	var parentElement = document.getElementById("adView");
+	var adContentImg = document.createElement('img');
+    adContentImg.setAttribute("width",'100%');
+    adContentImg.setAttribute("height",'100%');
+	adContentImg.style.position = "absolute";
+	adContentImg.style.visibility = "hidden";
+	adContentImg.src = (adOri == 0?myUrl1:myUrl2);
+	adContentImg.id = (adOri == 0?"adPor":"adLan");
+	adContentImg.onload=function(){
+		this.style.visibility = "visible";
+		var adOtherImg = document.getElementById(adOri == 0?"adLan":"adPor");
+		if(adOtherImg){
+			adOtherImg.style.visibility = "hidden";
+		}
+		window.location.href='adsmogo://adsmogo.cusexad.com/?action=onload'
+    };
+    adContentImg.onerror=function(){
+        //            alert('error load image'+adImg.url1);
+        window.location.href='adsmogo://adsmogo.cusexad.com/?action=errorload';
+    };
+	adContentImg.onclick = function(){
+		window.location.href='adsmogo://adsmogo.cusexad.com/?action=click'
+    };
+		
+	parentElement.appendChild(adContentImg);
+	
+}
+
+
+
+</script>
+</head>
+
+<body>
+<body>
+
+<div id="adView"></div>
+</body>
+</body>
+</html>
