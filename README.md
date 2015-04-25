@@ -1,5 +1,5 @@
 # KuailewoApp
-一款练手App 服务端采用flask搭建和scrapy爬取数据
+一款练手App 服务端采用flask搭建和scrapy爬取数据 [服务端代码](https://github.com/zhaofucheng1129/KuailewoAppServer)
 ##ScreenShot
 ![pic1](ScreenShot.gif)
 ##使用第三方库
